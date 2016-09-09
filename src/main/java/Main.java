@@ -23,7 +23,7 @@ public class Main {
     port(Integer.valueOf(System.getenv("PORT")));
     staticFileLocation("/public");
 
-      get("/hello", (req, res) -> {
+    get("/hello", (req, res) -> {
       RelativisticModel.select();
 
       String energy = System.getenv().get("ENERGY");
@@ -43,7 +43,7 @@ public class Main {
       Connection connection = null;
       Map<String, Object> attributes = new HashMap<>();
       try {
-        connection = getConnection();
+        connection = DatabaseUrl.extract().getConnection();
 
         Statement stmt = connection.createStatement();
         stmt.executeUpdate("CREATE TABLE IF NOT EXISTS ticks (tick timestamp)");
